@@ -1,9 +1,9 @@
-import Formular from "@/components/Fomular";
+import SearchForm from "@/components/SearchForm";
 export default function Homepage() {
   return (
     <>
       <h1>HR Manager App</h1>
-      <Formular />
+      <SearchForm />
     </>
   );
 }

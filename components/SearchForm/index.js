@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { employees } from "@/test_daten/test_daten";
 
-function Formular() {
+function SearchForm() {
   const [searchValue, setSearchValue] = useState("");
   const searchResults = employees.filter((employee) =>
     employee.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -16,7 +16,7 @@ function Formular() {
   function handleShowAll() {
     setSearchValue("");
   }
-  // vercel test
+
   return (
     <>
       <h2>Mitarbeiterliste</h2>
@@ -38,4 +38,4 @@ function Formular() {
   );
 }
 
-export default Formular;
+export default SearchForm;
