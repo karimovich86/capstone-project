@@ -1,27 +1,35 @@
-import { useState } from "react";
-import { employees } from "@/test_daten/test_daten";
+import React, { useState } from 'react';
+import { employees } from '@/test_daten/test_daten';
 
-function SearchForm() {
-  const [searchValue, setSearchValue] = useState("");
+const EmployeeProfile = () => {
+  const [searchValue, setSearchValue] = useState('');
   const searchResults = employees.filter((employee) =>
     employee.name.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  const [showInfo, setShowInfo] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const handleProfileClick = (employee) => {
+    setSelectedEmployee(employee);
+    setShowInfo(!showInfo);
+  };
+
   function handleSearch(event) {
     event.preventDefault();
     const search = event.target.elements.search_name.value;
-
     setSearchValue(search);
   }
 
   function handleShowAll() {
-    setSearchValue("");
+    setSearchValue('');
   }
 
   return (
     <>
       <h2>Mitarbeiterliste</h2>
       <form onSubmit={handleSearch}>
-        <label htmlFor="search_name">suche:</label>
+        <label htmlFor="search_name">Suche:</label>
         <input type="text" name="search_name" id="search_name" />
         <button type="submit">Suchen</button>
       </form>
@@ -30,12 +38,25 @@ function SearchForm() {
       <ul>
         {(searchValue ? searchResults : employees).map((employee) => (
           <li key={employee.id}>
-            {employee.name} - {employee.position}
+            <div>
+              <img
+                src="/path/to/profile-picture.jpg"
+                alt="Profilbild"
+                onClick={() => handleProfileClick(employee)}
+              />
+              {showInfo && selectedEmployee && selectedEmployee.id === employee.id && (
+                <div>
+                  <h2>{selectedEmployee.name}</h2>
+                  <p>Position: {selectedEmployee.position}</p>
+                  {/* Zusätzliche Informationen können hier angezeigt werden */}
+                </div>
+              )}
+            </div>
           </li>
         ))}
       </ul>
     </>
   );
-}
+};
 
-export default SearchForm;
+export default EmployeeProfile;
