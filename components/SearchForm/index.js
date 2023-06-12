@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { employees } from '@/test_daten/test_daten';
+import React, { useState } from "react";
+import { employees } from "@/test_daten/test_daten";
 
 const EmployeeProfile = () => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const searchResults = employees.filter((employee) =>
     employee.name.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -22,7 +22,7 @@ const EmployeeProfile = () => {
   }
 
   function handleShowAll() {
-    setSearchValue('');
+    setSearchValue("");
   }
 
   return (
@@ -40,17 +40,20 @@ const EmployeeProfile = () => {
           <li key={employee.id}>
             <div>
               <img
-                src="/path/to/profile-picture.jpg"
+                src={`/pictures/${employee.id}.png`}
                 alt="Profilbild"
                 onClick={() => handleProfileClick(employee)}
               />
-              {showInfo && selectedEmployee && selectedEmployee.id === employee.id && (
-                <div>
-                  <h2>{selectedEmployee.name}</h2>
-                  <p>Position: {selectedEmployee.position}</p>
-                  {/* Zusätzliche Informationen können hier angezeigt werden */}
-                </div>
-              )}
+              {showInfo &&
+                selectedEmployee &&
+                selectedEmployee.id === employee.id && (
+                  <div>
+                    <h2>{selectedEmployee.name}</h2>
+                    <p>Position: {selectedEmployee.position}</p>
+                    <p>Alter: {selectedEmployee.age}</p>
+                    <p>Startdatum: {selectedEmployee.startDate}</p>
+                  </div>
+                )}
             </div>
           </li>
         ))}

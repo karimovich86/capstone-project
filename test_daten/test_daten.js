@@ -1,7 +1,7 @@
 export const employees = [
   {
     id: 1,
-    name: "Safae Belhaj",
+    name: "Lisa Schmidt",
     position: "Manager",
     age: 35,
     startDate: "2020-02-15",
@@ -22,51 +22,9 @@ export const employees = [
   },
   {
     id: 4,
-    name: "Lisa Schmidt",
+    name: "Peter Schulz",
     position: "Designer",
     age: 31,
     startDate: "2019-05-03",
-  },
-  {
-    id: 5,
-    name: "Peter Schulz",
-    position: "Sales Representative",
-    age: 37,
-    startDate: "2020-11-20",
-  },
-  {
-    id: 6,
-    name: "Sarah Meier",
-    position: "Marketing Specialist",
-    age: 29,
-    startDate: "2021-01-05",
-  },
-  {
-    id: 7,
-    name: "Thomas Fischer",
-    position: "Accountant",
-    age: 40,
-    startDate: "2017-03-12",
-  },
-  {
-    id: 8,
-    name: "Laura Keller",
-    position: "Human Resources",
-    age: 33,
-    startDate: "2018-06-08",
-  },
-  {
-    id: 9,
-    name: "Janine Wagner",
-    position: "Customer Support",
-    age: 27,
-    startDate: "2022-03-01",
-  },
-  {
-    id: 10,
-    name: "Markus Becker",
-    position: "IT Administrator",
-    age: 45,
-    startDate: "2016-09-30",
   },
 ];
