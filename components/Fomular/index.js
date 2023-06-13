@@ -1,1 +1,0 @@
-export default function Formular () {return( <form><h1>Formular</h1><label>Name<input></input><button>Submit</button></label><br></br><label>Adresse</label></form>) }
