@@ -73,6 +73,8 @@ const EmployeeProfile = () => {
         <option value="age">Alter</option>
         <option value="startDate">Startdatum</option>
         <option value="position">Position</option>
+        <option value="Abteilung">Abteilung</option>
+        <option value="Gehalt">Gehalt</option>
       </select>
 
       <ul>
@@ -92,6 +94,8 @@ const EmployeeProfile = () => {
                     <p>Position: {selectedEmployee.position}</p>
                     <p>Alter: {selectedEmployee.age}</p>
                     <p>Startdatum: {selectedEmployee.startDate}</p>
+                    <p>Abteilung: {selectedEmployee.department}</p>
+                    <p>Gehalt: {selectedEmployee.salary}</p>
                   </div>
                 )}
             </div>

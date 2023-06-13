@@ -1,41 +1,26 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
+  /* ... andere Stilregeln ... */
+
+  .search-bar {
+    display: flex;
+    align-items: center;
   }
 
-  body {
-    margin: 0;
-    font-family: system-ui;
-    background-color: black;
-  }
-
-  h2 {
-    color: gold;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    margin-bottom: 10px;
-  }
-
-  img {
-    border: 2px solid gold;
+  .search-button,
+  .show-all-button {
+    margin-left: 10px;
+    background-color: gold;
+    color: White;
+    border: none;
+    padding: 5px 10px;
     cursor: pointer;
   }
-
-  div {
-    color: gold;
+  body {
+    background-color: black;
+    color: white;
   }
-
-  p {
-    color: gold;
-  }
+  
+ 
 `;
