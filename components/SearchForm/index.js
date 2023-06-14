@@ -1,83 +1,96 @@
 import React, { useState } from "react";
 import { employees } from "@/test_daten/test_daten";
+import styled from "styled-components";
 
-const SearchBar = ({ handleSearch, handleShowAll }) => {
-  return (
-    <form onSubmit={handleSearch}>
-      <div className="search-bar">
-        <input type="text" name="search_name" id="search_name" />
-        <button type="submit" className="search-button">
-          Suchen
-        </button>
-        <button
-          type="button"
-          onClick={handleShowAll}
-          className="show-all-button"
-        >
-          Alle anzeigen
-        </button>
-      </div>
-    </form>
-  );
-};
+// Styled Components
+const SearchBarContainer = styled.form`
+  display: flex;
+  align-items: center;
+`;
 
-const SortDropdown = ({ handleSort }) => {
-  return (
-    <div>
-      <label htmlFor="sort_order">Sortieren nach:</label>
-      <select id="sort_order" name="sort_order" onChange={handleSort}>
-        <option value="name">Name</option>
-        <option value="age">Alter</option>
-        <option value="startDate">Startdatum</option>
-        <option value="position">Position</option>
-        <option value="department">Abteilung</option>
-        <option value="salary">Gehalt</option>
-      </select>
-    </div>
-  );
-};
+const SearchInput = styled.input`
+  margin-right: 10px;
+`;
 
+const SearchButton = styled.button`
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+`;
+
+const ShowAllButton = styled.button`
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+`;
+
+const SortDropdownContainer = styled.div`
+  margin-top: 10px;
+`;
+
+const EmployeeList = styled.ul`
+  list-style: none; /* Entfernt die Aufzählungspunkte */
+`;
+
+const EmployeeListItem = styled.li``;
+
+const ProfileContainer = styled.div`
+  text-align: center; /* Zentriert den Inhalt horizontal */
+`;
+
+const ProfileImage = styled.img`
+  cursor: pointer;
+`;
+
+const ProfileDetails = styled.div`
+  border: 2px solid gold; /* Goldener Rahmen um die Info-Box */
+  padding: 10px;
+`;
+
+const ProfileName = styled.h2``;
+
+const ProfileItem = styled.p``;
+
+// Komponente für das Mitarbeiterprofil
 const EmployeeProfile = () => {
-  // Zustandsvariablen für die Suche und Sortierung
   const [searchValue, setSearchValue] = useState("");
-  const [sortOrder, setSortOrder] = useState("default"); // Zustandsvariable für Sortierreihenfolge
+  const [sortOrder, setSortOrder] = useState("default");
 
-  // Suchergebnisse basierend auf eingegebenem Suchwert filtern
+  // Filtert die Mitarbeiter basierend auf der Sucheingabe
   const searchResults = employees.filter((employee) =>
     employee.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  // Zustandsvariablen für die angezeigten Informationen eines ausgewählten Mitarbeiters
   const [showInfo, setShowInfo] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  // Handler-Funktion für Klick auf Profilbild
   const handleProfileClick = (employee) => {
     setSelectedEmployee(employee);
     setShowInfo(!showInfo);
   };
 
-  // Handler-Funktion für Suche
   function handleSearch(event) {
     event.preventDefault();
     const search = event.target.elements.search_name.value;
     setSearchValue(search);
   }
 
-  // Handler-Funktion für "Alle anzeigen" Button
   function handleShowAll() {
     setSearchValue("");
   }
 
-  // Handler-Funktion für Sortierung
   function handleSort(event) {
     const sort = event.target.value;
     setSortOrder(sort);
   }
 
-  // Mitarbeiterliste basierend auf Sortierreihenfolge sortieren
   let sortedEmployees = [...(searchValue ? searchResults : employees)];
 
+  // Sortiert die Mitarbeiter basierend auf der ausgewählten Sortierreihenfolge
   if (sortOrder === "name") {
     sortedEmployees.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortOrder === "position") {
@@ -85,46 +98,62 @@ const EmployeeProfile = () => {
   } else if (sortOrder === "age") {
     sortedEmployees.sort((a, b) => a.age - b.age);
   } else if (sortOrder === "startDate") {
-    sortedEmployees.sort(
-      (a, b) => new Date(a.startDate) - new Date(b.startDate)
-    );
-  } else if (sortOrder === "department") {
-    sortedEmployees.sort((a, b) => a.department.localeCompare(b.department));
-  } else if (sortOrder === "salary") {
-    sortedEmployees.sort((a, b) => a.salary - b.salary);
+    sortedEmployees.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
   }
 
   return (
     <>
       <h2>Mitarbeiterliste</h2>
-      <SearchBar handleSearch={handleSearch} handleShowAll={handleShowAll} />
-      <SortDropdown handleSort={handleSort} />
 
-      <ul>
+      {/* Suchleiste */}
+      <SearchBarContainer onSubmit={handleSearch}>
+        <SearchInput type="text" name="search_name" id="search_name" />
+        <SearchButton type="submit">Suchen</SearchButton>
+        <ShowAllButton type="button" onClick={handleShowAll}>
+          Alle anzeigen
+        </ShowAllButton>
+      </SearchBarContainer>
+
+      {/* Sortier-Dropdown */}
+      <SortDropdownContainer>
+        <label htmlFor="sort_order">Sortieren nach:</label>
+        <select id="sort_order" name="sort_order" onChange={handleSort}>
+          <option value="name">Name</option>
+          <option value="age">Alter</option>
+          <option value="startDate">Startdatum</option>
+          <option value="position">Position</option>
+          <option value="department">Abteilung</option>
+          <option value="salary">Gehalt</option>
+        </select>
+      </SortDropdownContainer>
+
+      {/* Mitarbeiterliste */}
+      <EmployeeList role="list">
         {sortedEmployees.map((employee) => (
-          <li key={employee.id}>
-            <div>
-              <img
+          <EmployeeListItem key={employee.id}>
+            <ProfileContainer>
+              {/* Profilbild */}
+              <ProfileImage
                 src={`/pictures/${employee.id}.png`}
                 alt="Profilbild"
                 onClick={() => handleProfileClick(employee)}
               />
-              {showInfo &&
-                selectedEmployee &&
-                selectedEmployee.id === employee.id && (
-                  <div>
-                    <h2>{selectedEmployee.name}</h2>
-                    <p>Position: {selectedEmployee.position}</p>
-                    <p>Alter: {selectedEmployee.age}</p>
-                    <p>Startdatum: {selectedEmployee.startDate}</p>
-                    <p>Abteilung: {selectedEmployee.department}</p>
-                    <p>Gehalt: {selectedEmployee.salary}</p>
-                  </div>
-                )}
-            </div>
-          </li>
+
+              {/* Info-Box anzeigen, wenn ausgewählt */}
+              {showInfo && selectedEmployee && selectedEmployee.id === employee.id && (
+                <ProfileDetails>
+                  <ProfileName>{selectedEmployee.name}</ProfileName>
+                  <ProfileItem>Position: {selectedEmployee.position}</ProfileItem>
+                  <ProfileItem>Alter: {selectedEmployee.age}</ProfileItem>
+                  <ProfileItem>Startdatum: {selectedEmployee.startDate}</ProfileItem>
+                  <ProfileItem>Abteilung: {selectedEmployee.department}</ProfileItem>
+                  <ProfileItem>Gehalt: {selectedEmployee.salary}</ProfileItem>
+                </ProfileDetails>
+              )}
+            </ProfileContainer>
+          </EmployeeListItem>
         ))}
-      </ul>
+      </EmployeeList>
     </>
   );
 };
