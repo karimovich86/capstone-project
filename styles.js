@@ -31,12 +31,9 @@ const GlobalStyle = createGlobalStyle`
 
   .info-box {
     border: 10px solid gold;
-    padding: 10px;
+    padding: 50px;
     margin-top: 10px;
   }
 `;
 
 export default GlobalStyle;
-
-
-

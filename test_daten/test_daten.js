@@ -30,7 +30,7 @@ export const employees = [
     id: 4,
     name: "Peter Schulz",
     position: "Designer",
-    age: 31,
+    age: 51,
     startDate: "2019-05-03",
     department: "Creative",
     salary: 50000,

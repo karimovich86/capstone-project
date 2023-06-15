@@ -98,12 +98,14 @@ const EmployeeProfile = () => {
   } else if (sortOrder === "age") {
     sortedEmployees.sort((a, b) => a.age - b.age);
   } else if (sortOrder === "startDate") {
-    sortedEmployees.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+    sortedEmployees.sort(
+      (a, b) => new Date(a.startDate) - new Date(b.startDate)
+    );
   }
 
   return (
     <>
-      <h2>Mitarbeiterliste</h2>
+      <h3>Startup Company</h3>
 
       {/* Suchleiste */}
       <SearchBarContainer onSubmit={handleSearch}>
@@ -140,16 +142,24 @@ const EmployeeProfile = () => {
               />
 
               {/* Info-Box anzeigen, wenn ausgewählt */}
-              {showInfo && selectedEmployee && selectedEmployee.id === employee.id && (
-                <ProfileDetails>
-                  <ProfileName>{selectedEmployee.name}</ProfileName>
-                  <ProfileItem>Position: {selectedEmployee.position}</ProfileItem>
-                  <ProfileItem>Alter: {selectedEmployee.age}</ProfileItem>
-                  <ProfileItem>Startdatum: {selectedEmployee.startDate}</ProfileItem>
-                  <ProfileItem>Abteilung: {selectedEmployee.department}</ProfileItem>
-                  <ProfileItem>Gehalt: {selectedEmployee.salary}</ProfileItem>
-                </ProfileDetails>
-              )}
+              {showInfo &&
+                selectedEmployee &&
+                selectedEmployee.id === employee.id && (
+                  <ProfileDetails>
+                    <ProfileName>{selectedEmployee.name}</ProfileName>
+                    <ProfileItem>
+                      Position: {selectedEmployee.position}
+                    </ProfileItem>
+                    <ProfileItem>Alter: {selectedEmployee.age}</ProfileItem>
+                    <ProfileItem>
+                      Startdatum: {selectedEmployee.startDate}
+                    </ProfileItem>
+                    <ProfileItem>
+                      Abteilung: {selectedEmployee.department}
+                    </ProfileItem>
+                    <ProfileItem>Gehalt: {selectedEmployee.salary}</ProfileItem>
+                  </ProfileDetails>
+                )}
             </ProfileContainer>
           </EmployeeListItem>
         ))}
