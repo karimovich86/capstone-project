@@ -5,6 +5,8 @@ export const employees = [
     position: "Manager",
     age: 35,
     startDate: "2020-02-15",
+    department: "HR",
+    salary: 60000,
   },
   {
     id: 2,
@@ -12,6 +14,8 @@ export const employees = [
     position: "Supervisor",
     age: 42,
     startDate: "2018-09-10",
+    department: "Sales",
+    salary: 55000,
   },
   {
     id: 3,
@@ -19,12 +23,16 @@ export const employees = [
     position: "Developer",
     age: 28,
     startDate: "2021-07-01",
+    department: "IT",
+    salary: 70000,
   },
   {
     id: 4,
     name: "Peter Schulz",
     position: "Designer",
-    age: 31,
+    age: 51,
     startDate: "2019-05-03",
+    department: "Creative",
+    salary: 50000,
   },
 ];
